@@ -24,6 +24,9 @@ function createPacNerd () {
     PacNerd.setPosition(10, 105)
     controller.moveSprite(PacNerd)
 }
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite4, otherSprite4) {
+    game.over(false)
+})
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Victim, function (sprite, otherSprite) {
     if (otherSprite == ghost1) {
         ghost1 = sprites.create(img`
@@ -74,20 +77,6 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Victim, function (sprite, otherS
     info.changeScoreBy(10)
     otherSprite.destroy(effects.fire, 500)
 })
-sprites.onOverlap(SpriteKind.Player, SpriteKind.BigDots, function (sprite, otherSprite) {
-    otherSprite.destroy(effects.spray, 500)
-    ghost1.setKind(SpriteKind.Victim)
-    ghost1.follow(PacNerd, 0)
-    ghost1.startEffect(effects.spray, 10000)
-    ghost2.setKind(SpriteKind.Victim)
-    ghost2.follow(PacNerd, 0)
-    ghost2.startEffect(effects.spray, 10000)
-    pause(10000)
-    ghost1.setKind(SpriteKind.Enemy)
-    ghost1.follow(PacNerd, 30)
-    ghost2.setKind(SpriteKind.Enemy)
-    ghost2.follow(PacNerd, 40)
-})
 function createDots () {
     for (let value of tiles.getTilesByType(assets.tile`myTile1`)) {
         dot1 = sprites.create(img`
@@ -110,7 +99,7 @@ function createDots () {
             `, SpriteKind.Food)
         tiles.placeOnTile(dot1, value)
     }
-    for (let value of tiles.getTilesByType(assets.tile`myTile2`)) {
+    for (let value2 of tiles.getTilesByType(assets.tile`myTile2`)) {
         dot1 = sprites.create(img`
             . . . . . . . . . . . . . . . . 
             . . . . . . . . . . . . . . . . 
@@ -129,9 +118,9 @@ function createDots () {
             . . . . . . . . . . . . . . . . 
             . . . . . . . . . . . . . . . . 
             `, SpriteKind.Food)
-        tiles.placeOnTile(dot1, value)
+        tiles.placeOnTile(dot1, value2)
     }
-    for (let value of tiles.getTilesByType(assets.tile`myTile3`)) {
+    for (let value3 of tiles.getTilesByType(assets.tile`myTile3`)) {
         dot1 = sprites.create(img`
             . . . . . . . . . . . . . . . . 
             . . . . . . . . . . . . . . . . 
@@ -150,9 +139,9 @@ function createDots () {
             . . . . . . . . . . . . . . . . 
             . . . . . . . . . . . . . . . . 
             `, SpriteKind.Food)
-        tiles.placeOnTile(dot1, value)
+        tiles.placeOnTile(dot1, value3)
     }
-    for (let value of tiles.getTilesByType(assets.tile`myTile4`)) {
+    for (let value4 of tiles.getTilesByType(assets.tile`myTile4`)) {
         dot1 = sprites.create(img`
             . . . . . . . . . . . . . . . . 
             . . . . . . . . . . . . . . . . 
@@ -171,9 +160,9 @@ function createDots () {
             . . . . . . . . . . . . . . . . 
             . . . . . . . . . . . . . . . . 
             `, SpriteKind.Food)
-        tiles.placeOnTile(dot1, value)
+        tiles.placeOnTile(dot1, value4)
     }
-    for (let value of tiles.getTilesByType(assets.tile`myTile`)) {
+    for (let value5 of tiles.getTilesByType(assets.tile`myTile`)) {
         dot1 = sprites.create(img`
             . . . . . . . . . . . . . . . . 
             . . . . . . . . . . . . . . . . 
@@ -192,9 +181,9 @@ function createDots () {
             . . . . . . . . . . . . . . . . 
             . . . . . . . . . . . . . . . . 
             `, SpriteKind.Food)
-        tiles.placeOnTile(dot1, value)
+        tiles.placeOnTile(dot1, value5)
     }
-    for (let value of tiles.getTilesByType(assets.tile`myTile0`)) {
+    for (let value6 of tiles.getTilesByType(assets.tile`myTile0`)) {
         dot1 = sprites.create(img`
             . . . . . . . . . . . . . . . . 
             . . . . . . . . . . . . . . . . 
@@ -213,9 +202,9 @@ function createDots () {
             . . . . . . . . . . . . . . . . 
             . . . . . . . . . . . . . . . . 
             `, SpriteKind.Food)
-        tiles.placeOnTile(dot1, value)
+        tiles.placeOnTile(dot1, value6)
     }
-    for (let value of tiles.getTilesByType(assets.tile`myTile5`)) {
+    for (let value7 of tiles.getTilesByType(assets.tile`myTile5`)) {
         dot1 = sprites.create(img`
             . . . . . . . . . . . . . . . . 
             . . . . . . . . . . . . . . . . 
@@ -234,9 +223,9 @@ function createDots () {
             . . . . . . . . . . . . . . . . 
             . . . . . . . . . . . . . . . . 
             `, SpriteKind.Food)
-        tiles.placeOnTile(dot1, value)
+        tiles.placeOnTile(dot1, value7)
     }
-    for (let value of tiles.getTilesByType(assets.tile`transparency16`)) {
+    for (let value8 of tiles.getTilesByType(assets.tile`transparency16`)) {
         dot1 = sprites.create(img`
             . . . . . . . . . . . . . . . . 
             . . . . . . . . . . . . . . . . 
@@ -255,9 +244,23 @@ function createDots () {
             . . . . . . . . . . . . . . . . 
             . . . . . . . . . . . . . . . . 
             `, SpriteKind.Food)
-        tiles.placeOnTile(dot1, value)
+        tiles.placeOnTile(dot1, value8)
     }
 }
+sprites.onOverlap(SpriteKind.Player, SpriteKind.BigDots, function (sprite2, otherSprite2) {
+    otherSprite2.destroy(effects.spray, 500)
+    ghost1.setKind(SpriteKind.Victim)
+    ghost1.follow(PacNerd, 0)
+    ghost1.startEffect(effects.spray, 10000)
+    ghost2.setKind(SpriteKind.Victim)
+    ghost2.follow(PacNerd, 0)
+    ghost2.startEffect(effects.spray, 10000)
+    pause(10000)
+    ghost1.setKind(SpriteKind.Enemy)
+    ghost1.follow(PacNerd, 30)
+    ghost2.setKind(SpriteKind.Enemy)
+    ghost2.follow(PacNerd, 40)
+})
 function createMonsters () {
     ghost1 = sprites.create(img`
         . . . . . . . . . . . . . . . . 
@@ -302,14 +305,6 @@ function createMonsters () {
     ghost2.setKind(SpriteKind.Enemy)
     ghost2.follow(PacNerd, 40)
 }
-sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
-    otherSprite.destroy()
-    dotCount += 1
-    info.changeScoreBy(1)
-    if (dotCount == 49) {
-        game.over(true)
-    }
-})
 function createBigDots () {
     dot2 = sprites.create(img`
         . . . . . . . . . . . . . . . . 
@@ -350,8 +345,13 @@ function createBigDots () {
         `, SpriteKind.BigDots)
     dot2.setPosition(152, 40)
 }
-sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
-    game.over(false)
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite3, otherSprite3) {
+    otherSprite3.destroy()
+    dotCount += 1
+    info.changeScoreBy(1)
+    if (dotCount == 49) {
+        game.over(true)
+    }
 })
 let dot2: Sprite = null
 let dot1: Sprite = null
